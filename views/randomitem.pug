@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+  - let image_names = ["ost1.jpg", "ost2.jpg", "ost3.jpg", "ost4.webp", "ost5.jpg"]
+  - for(let i = 0; i < 3; i++) {
+    - name = image_names[Math.floor(Math.random() * 5)]
+    - console.log(name)
+    img(src=`/images/${name}`, height=300, width=300)
+  - }
+  
+  
+  

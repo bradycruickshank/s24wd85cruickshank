@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+  - results = [{name:"Jerry", age:2, feather_count:546}, {name:"Susie", age:4, feather_count:668}, {name:"Tom", age:6, feather_count:800}]
+  div(class="container-fluid")
+    div(class="row")
+    - let index = 0
+    each item in results
+      div(class="col-sm-2" onclick=`buy(${index})`) Name: #{item["name"]} Age: #{item["age"]} Feather Count: #{item["feather_count"]}
+      - index += 1
+  script.
+    function buy(index) {
+      alert("You purchased item " + index)
+    }
+  
