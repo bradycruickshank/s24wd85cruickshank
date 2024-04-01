@@ -27,3 +27,16 @@ exports.ostrich_delete = function(req, res) {
 exports.ostrich_update_put = function(req, res) {
     res.send('NOT IMPLEMENTED: Ostrich update PUT' + req.params.id);
 };
+
+// VIEWS
+// Handle a show all view
+exports.ostrich_view_all_Page = async function(req, res) {
+    try{
+    theOstriches = await Ostrich.find();
+    res.render('ostrich', { title: 'Ostrich Search Results', results: theOstriches });
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+    };

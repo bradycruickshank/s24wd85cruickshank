@@ -72,7 +72,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/ostrich', ostrichRouter);
+app.use('/ostriches', ostrichRouter);
 app.use('/grid', gridRouter);
 app.use('/pick', randomRouter);
 app.use('/resource', resourceRouter);
