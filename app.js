@@ -4,11 +4,59 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+require('dotenv').config();
+const connectionString = process.env.MONGO_CON
+mongoose = require('mongoose');
+mongoose.connect(connectionString);
+
+//Get the default connection
+var db = mongoose.connection;
+//Bind connection to error event
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once("open", function(){
+console.log("Connection to DB succeeded")});
+var Ostrich = require("./models/ostrich");
+
+async function recreateDB(){
+  // Delete everything
+  await Ostrich.deleteMany();
+  let instance1 = new
+  Ostrich({name:"Gary", age:5,
+  feather_count:3490});
+  instance1.save().then(doc=>{
+  console.log("First object saved")}
+  ).catch(err=>{
+  console.error(err)
+  });
+
+  let instance2 = new
+  Ostrich({name:"Steve", age:2,
+  feather_count:5489});
+  instance2.save().then(doc=>{
+  console.log("Second object saved")}
+  ).catch(err=>{
+  console.error(err)
+  });
+
+  let instance3 = new
+  Ostrich({name:"Lisa", age:4,
+  feather_count:2223});
+  instance3.save().then(doc=>{
+  console.log("Third object saved")}
+  ).catch(err=>{
+  console.error(err)
+  });
+}
+let reseed = true;
+if (reseed) {recreateDB();}
+  
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var ostrichRouter = require('./routes/ostrich');
 var gridRouter = require('./routes/grid');
 var randomRouter = require('./routes/pick');
+var resourceRouter = require('./routes/resource');
 
 var app = express();
 
@@ -27,6 +75,7 @@ app.use('/users', usersRouter);
 app.use('/ostrich', ostrichRouter);
 app.use('/grid', gridRouter);
 app.use('/pick', randomRouter);
+app.use('/resource', resourceRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
