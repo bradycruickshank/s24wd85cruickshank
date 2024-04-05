@@ -48,9 +48,25 @@ exports.ostrich_create_post = async function(req, res) {
 exports.ostrich_delete = function(req, res) {
     res.send('NOT IMPLEMENTED: Ostrich delete DELETE ' + req.params.id);
 };
+
 // Handle Ostrich update form on PUT.
-exports.ostrich_update_put = function(req, res) {
-    res.send('NOT IMPLEMENTED: Ostrich update PUT' + req.params.id);
+exports.ostrich_update_put = async function(req, res) {
+console.log(`update on id ${req.params.id} with body
+    ${JSON.stringify(req.body)}`)
+    try {
+        let toUpdate = await Ostrich.findById( req.params.id)
+        // Do updates of properties
+        if(req.body.name) toUpdate.name = req.body.name;
+        if(req.body.age) toUpdate.age = req.body.age;
+        if(req.body.feather_count) toUpdate.feather_count = req.body.feather_count;
+        let result = await toUpdate.save();
+        console.log("Sucess " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": ${err}: Update for id ${req.params.id}
+            failed`);
+    }
 };
 
 // VIEWS
