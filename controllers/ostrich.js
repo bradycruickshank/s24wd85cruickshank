@@ -12,9 +12,17 @@ exports.ostrich_list = async function(req, res) {
 };
 
 // for a specific Ostrich.
-exports.ostrich_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: Ostrich detail: ' + req.params.id);
+exports.ostrich_detail = async function(req, res) {
+    console.log("detail" + req.params.id)
+    try {
+        result = await Ostrich.findById( req.params.id)
+        res.send(result)
+    } catch (error) {
+        res.status(500)
+        res.send(`{"error": document for id ${req.params.id} not found`);
+    }
 };
+
 // Handle Ostrich create on POST.
 exports.ostrich_create_post = async function(req, res) {
     console.log(req.body)
