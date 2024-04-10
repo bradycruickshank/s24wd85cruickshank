@@ -4,31 +4,32 @@ block content
   h1= title
   
   form(id='OstrichForm', action="/resource/ostriches", method="POST")
-  div.form-group
-    label.ostrichAttr(for='ostrich_type') Ostrich type
-    input#ostrich_type(type='text', name='ostrich_type')
-  div.form-group
-    label.ostrichAttr(for='size') Ostrich size
-    input#size(type='text', name='size')
-  div.form-group
-    label.ostrichAttr(for='cost') Ostrich cost
-    input#cost(type='number', name='cost')
-  input(type="submit")
+    div.form-group
+      label.ostrichAttr(for='name') Ostrich name
+      input#name(type='text', name='name')
+    div.form-group
+      label.ostrichAttr(for='age') Ostrich age
+      input#age(type='number', name='age')
+    div.form-group
+      label.ostrichAttr(for='feather_count') Ostrich feather count
+      input#feather_count(type='number', name='feather_count')
+    input(type="submit")
 
-script.
-  document.forms['OstrichForm'].addEventListener('submit', (event) => {
-    event.preventDefault();
-    // TODO do something here to show user that form is being submitted
-    fetch(event.target.action, {
-      method: 'POST',
-      body: new URLSearchParams(new FormData(event.target)) // event.target is the form
-    }).then((resp) => {
-      return resp.json(); // or resp.text() or whatever the server sends
-    }).then((body) => {
-      alert("Save succeded")
-      // TODO handle body
-    }).catch((error) => {
-      // TODO handle error
-      alert("Save failed " + error )
+  script.
+    document.forms['OstrichForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      // TODO do something here to show user that form is being submitted
+      alert("Form is being submitted")
+      fetch(event.target.action, {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+        alert("Save succeded")
+        // TODO handle body
+      }).catch((error) => {
+        // TODO handle error
+        alert("Save failed " + error )
+      });
     });
-  });

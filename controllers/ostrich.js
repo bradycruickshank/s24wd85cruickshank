@@ -103,3 +103,15 @@ exports.ostrich_view_one_Page = async function(req, res) {
         res.send(`{'error': '${err}'}`);
     }
 };
+
+// Handle building the view for creating a ostrich.
+exports.ostrich_create_Page = function(req, res) {
+    console.log("create view")
+    try{
+    res.render('ostrichcreate', { title: 'Ostrich Create'});
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+    };
