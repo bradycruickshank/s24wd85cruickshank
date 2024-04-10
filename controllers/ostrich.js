@@ -45,8 +45,16 @@ exports.ostrich_create_post = async function(req, res) {
 };
 
 // Handle Ostrich delete from on DELETE.
-exports.ostrich_delete = function(req, res) {
-    res.send('NOT IMPLEMENTED: Ostrich delete DELETE ' + req.params.id);
+exports.ostrich_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+        result = await Ostrich.findByIdAndDelete( req.params.id)
+        console.log("Removed " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": Error deleting ${err}}`);
+    }
 };
 
 // Handle Ostrich update form on PUT.
@@ -81,3 +89,17 @@ exports.ostrich_view_all_Page = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
     };
+
+// Handle a show one view with id specified by query
+exports.ostrich_view_one_Page = async function(req, res) {
+    console.log("single view for id " + req.query.id)
+    try{
+        result = await Ostrich.findById( req.query.id)
+        res.render('ostrichdetail',
+            { title: 'Ostrich Detail', toShow: result });
+    }
+    catch(err){
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};

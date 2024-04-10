@@ -17,4 +17,5 @@ router.put('/ostriches/:id', ostrich_controller.ostrich_update_put);
 router.get('/ostriches/:id', ostrich_controller.ostrich_detail);
 // GET request for list of all Ostrich items.
 router.get('/ostriches', ostrich_controller.ostrich_list);
+
 module.exports = router;

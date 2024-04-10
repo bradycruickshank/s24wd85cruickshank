@@ -1,0 +1,21 @@
+extends layout
+block content
+  h1= title
+
+  - let ostrichid = toShow._id
+  - let ostrich_name = toShow.name
+  - let ostrichage = toShow.age
+  - let ostrichfeather_count = toShow.feather_count
+  div
+    div.row
+      div(class='ostrichAttr mr-3') Ostrich ID is:
+      div #{ostrichid}
+    div.row
+      div(class='ostrichAttr mr-3') Ostrich Name is:
+      div #{ostrich_name}
+    div.row
+      div(class='ostrichAttr mr-3') Ostrich Age is:
+      div #{ostrichage}
+    div.row
+      div(class='ostrichAttr mr-3') Ostrich Feather Count is:
+      div #{ostrichfeather_count}
