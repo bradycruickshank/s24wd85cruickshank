@@ -19,5 +19,8 @@ router.get('/create', ostrich_controlers.ostrich_create_Page);
 /* GET create update page */
 router.get('/update', ostrich_controlers.ostrich_update_Page);
 
+/* GET delete ostrich page */
+router.get('/delete', ostrich_controlers.ostrich_delete_Page);
+
 
 
