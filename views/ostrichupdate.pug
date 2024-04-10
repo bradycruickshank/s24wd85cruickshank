@@ -1,0 +1,42 @@
+extends layout
+
+block content
+  h1= title
+  - let ostrichid = toShow._id
+  - let ostrichname = toShow.name
+  - let ostrichage = toShow.age
+  - let ostrichfeathercount = toShow.feather_count
+
+  div.row(class='mb-2')
+    div.mr-1 ID is
+    div #{ostrichid}
+  - let actionid = "/resource/ostriches/" + ostrichid
+  form(id='OstrichForm', action= actionid, method="PUT")
+    div.form-group
+      label.ostrichAttr(for='name') Ostrich name
+      input#name(type='text', name='name', value= ostrichname )
+    div.form-group
+      label.ostrichAttr(for='age') Ostrich age
+      input#age(type='number', name='age', value= ostrichage )
+    div.form-group
+      label.ostrichAttr(for='feather_count') Ostrich feather count
+      input#feather_count(type='number', name='feather_count', value= ostrichfeathercount )
+    input(type="submit")
+    
+  script.
+    document.forms['OstrichForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      // TODO do something here to show user that form is being submitted
+      fetch(event.target.action, {
+        method: 'PUT',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+        alert("Update succeded")
+        // TODO handle body
+      }).catch((error) => {
+        // TODO handle error
+        alert("Update failed " + error )
+      });
+    });
