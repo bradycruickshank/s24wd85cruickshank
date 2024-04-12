@@ -8,10 +8,16 @@ block content
     div(class="row")
     - let index = 0
     each item in items
+      - let destination = `dispatch(\"/ostriches/update?id=${item._id}\")`
       div(class="col-sm-2" onclick=`buy(${index})`) Name: #{item["name"]} Age: #{item["age"]} Feather Count: #{item["feather_count"]}
+        button.btn( class="btn-primary ml-1", onclick= destination) Update
       - index += 1
   script.
     function buy(index) {
       alert("You purchased item " + index)
+    }
+  script.
+    function dispatch(path){
+      window.location.href=path
     }
   

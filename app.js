@@ -7,7 +7,7 @@ var logger = require('morgan');
 require('dotenv').config();
 const connectionString = process.env.MONGO_CON
 console.log(connectionString)
-mongoose = require('mongoose');
+const mongoose = require('mongoose');
 mongoose.connect(connectionString);
 
 //Get the default connection
